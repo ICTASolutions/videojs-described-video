@@ -1,0 +1,14 @@
+.described-video-button {
+  float: right !important;
+  cursor: pointer;
+  width: 3em !important;
+  line-height: 3em;
+}
+
+.described-video-button:before {
+  content: "D))";
+}
+
+.described-video-button.is-described:before {
+  color: #66A8CC;
+}

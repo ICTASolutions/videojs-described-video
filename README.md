@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.org/brightcove/videojs-playlist.svg?branch=master)](https://travis-ci.org/brightcove/videojs-playlist)
 
-# Playlist plugin for videojs
+# Described Video plugin for videojs
 
 ## Usage
 
 ```js
-require('videojs-playlist');
+require('videojs-described-video');
 
 var player = videojs('video');
-player.playlist([{
+player.describedVideo([{
   sources: [{
     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
     type: 'video/mp4'
@@ -20,49 +20,32 @@ player.playlist([{
     type: 'video/mp4'
   }],
   poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-}, {
-  sources: [{
-    src: 'http://vjs.zencdn.net/v/oceans.mp4',
-    type: 'video/mp4'
-  }],
-  poster: 'http://www.videojs.com/img/poster.jpg'
-}, {
-  sources: [{
-    src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-    type: 'video/mp4'
-  }],
-  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-}, {
-  sources: [{
-    src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
-    type: 'video/mp4'
-  }],
-  poster: 'http://media.w3.org/2010/05/video/poster.png'
 }]);
 
-player.playlist.next();
+player.describedVideo.described();
 ```
 
 ## API
 
 * [Methods](#methods)
-  * [`player.playlist([Array newPlaylist])`](#playerplaylistarray-newplaylist---array)
-  * [`player.playlist.currentItem([Number newIndex])`](#playerplaylistcurrentitemnumber-newindex---number)
-  * [`player.playlist.contains(Any item)`](#playerplaylistcontainsany-item---boolean)
-  * [`player.playlist.indexOf(Any item)`](#playerplaylistindexofany-item---number)
-  * [`player.playlist.next()`](#playerplaylistnext---object)
-  * [`player.playlist.previous()`](#playerplaylistprevious---object)
-  * [`player.playlist.autoadvance()`](#playerplaylistautoadvancenumber-timeout---undefined)
+  * [`player.describedVideo([Array newPlaylist])`](#playerplaylistarray-newplaylist---array)
+  * [`player.describedVideo.currentItem([Number newIndex])`](#playerplaylistcurrentitemnumber-newindex---number)
+  * [`player.describedVideo.contains(Any item)`](#playerplaylistcontainsany-item---boolean)
+  * [`player.describedVideo.indexOf(Any item)`](#playerplaylistindexofany-item---number)
+  * [`player.describedVideo.next()`](#playerplaylistnext---object)
+  * [`player.describedVideo.previous()`](#playerplaylistprevious---object)
+  * [`player.describedVideo.described()`](#playerplaylistdescribed---object)
+  * [`player.describedVideo.original()`](#playerplaylistoriginal---object)
 * [Events](#events)
   * [`playlistchange`](#playlistchange)
 
 ### Methods
-#### `player.playlist([Array newPlaylist]) -> Array`
+#### `player.describedVideo([Array newPlaylist]) -> Array`
 This function allows you to either set or get the current playlist.
 If called without arguments, it is a getter, with an argument, it is a setter.
 
 ```js
-player.playlist();
+player.describedVideo();
 // [{
 //   sources: [{
 //     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -76,7 +59,7 @@ player.playlist();
 //   }],
 // ...
 
-player.playlist([{
+player.describedVideo([{
   sources: [{
     src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
     type: 'video/mp4'
@@ -107,7 +90,7 @@ player.currentItem(2);
 ```
 
 ```js
-player.playlist(samplePlaylist);
+player.describedVideo(samplePlaylist);
 player.src('http://example.com/video.mp4');
 player.playlist.currentItem(); // -1
 ```
@@ -173,7 +156,7 @@ player.playlist.next();
 // }
 
 
-player.playlist.currenItem(player.playlist().length - 1); // set to last item
+player.playlist.currenItem(player.describedVideo().length - 1); // set to last item
 // 4
 player.playlist.next();
 // undefined
@@ -202,15 +185,48 @@ player.playlist.previous();
 // undefined
 ```
 
-#### `player.playlist.autoadvance([Number timeout]) -> undefined`
-This function allows you to set up playlist auto advancement. Once enabled it will wait a `timeout` amount of milliseconds at the end of a video before proceeding automatically to the next video.
-Any value which is not a positive, finite, integer, will be treated as a request to cancel and reset the auto advancing.
-If you change autoadvance during a timeout period, the auto advance will be canceled and it will not advance the next video but it will use the new timeout value for the following videos.
+#### `player.playlist.described() -> Object`
+This functions allows you to switch to the described item in the playlist. You will receive the new playlist item back from this call. `player.playlist.currentItem` will be updated to return the new index.
+If you are already at the described item of the playlist, you will not be able to proceed past the end and instead will not receive anything back;
 
 ```js
-player.playlist.autoadvance(0); // will not wait before loading in the next item
-player.playlist.autoadvance(5); // will wait for 5 seconds before loading in the next item
-player.playlist.autoadvance(null); // reset and cancel the auto advance
+player.playlist.next();
+// {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+// }
+
+
+player.playlist.currenItem(player.describedVideo().length - 1); // set to last item
+// 4
+player.playlist.next();
+// undefined
+```
+
+#### `player.playlist.original() -> Object`
+This functions allows you to switch to the original item in the playlist. You will receive the new playlist item back from this call. `player.playlist.currentItem` will be updated to return the new index.
+If you are already at the original item of the playlist, you will not be able to proceed past the start and instead will not receive anything back;
+
+```js
+player.playlist.currenItem(1); // set to second item in the playlist
+// 1
+player.playlist.previous();
+// {
+//   sources: [{
+//     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+//     type: 'video/mp4'
+//   }],
+//   poster: 'http://media.w3.org/2010/05/sintel/poster.png'
+// }
+
+
+player.playlist.currenItem();
+// 0
+player.playlist.previous();
+// undefined
 ```
 
 ### Events
@@ -221,13 +237,13 @@ It is fired asynchronously to let the browser start loading the first video in t
 
 ```js
 player.on('playlistchange', function() {
-  console.log(player.playlist());
+  console.log(player.describedVideo());
 });
 
-player.playlist([1,2,3]);
+player.describedVideo([1,2,3]);
 // [1,2,3]
 
-player.playlist([4,5,6]);
+player.describedVideo([4,5,6]);
 // [4,5,6]
 ```
 
@@ -260,4 +276,8 @@ npm run test-watch
 ```
 Which will re-run the karma tests as you save your files to let you know your test results automatically.
 
-## [LICENSE](https://github.com/brightcove/videojs-playlist/blob/master/LICENSE.md)
+## Acknowledgement
+
+This plugin is based on the [playlist plugin](https://github.com/brightcove/videojs-playlist) from Brighcove.
+
+## [LICENSE](https://github.com/ICTASolutions/videojs-described-video/blob/master/LICENSE.md)

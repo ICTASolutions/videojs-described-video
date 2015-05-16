@@ -1,5 +1,4 @@
 var playItem = require('./playitem.js');
-var setupAutoadvance = require('./autoadvance.js');
 var isArray = Array.isArray || function(array) {
   return Object.prototype.toString.call(array) === '[object Array]';
 };
@@ -22,22 +21,24 @@ var indexInSources = function(arr, src) {
   return -1;
 };
 
-// factory method to return a new playlist with the following API
-// playlist(["a", "b", "c"]) // setter, ["a", "b", "c"]
-// playlist() // getter, ["a", "b", "c"]
-// playlist.currentItem() // getter, 0
-// playlist.currentItem(1) // setter, 1
-// playlist.next() // "c"
-// playlist.previous() // "b"
-var playlistMaker = function(player, plist) {
+// factory method to return a new describedVideo with the following API
+// describedVideo(["a", "b"]) // setter, ["a", "b"]
+// describedVideo() // getter, ["a", "b"]
+// describedVideo.currentItem() // getter, 0
+// describedVideo.currentItem(1) // setter, 1
+// describedVideo.next() // "b"
+// describedVideo.previous() // "a"
+// describedVideo.described() // "b"
+// describedVideo.original() // "a"
+// describedVideo.toggle() // "b"
+// describedVideo.isDescribed() // true
+var describedVideoMaker = function(player, plist) {
   var currentIndex = -1;
-  var autoadvanceTimeout = null;
   var list = [];
-  var playlistchangeTimeout;
   var loadFirstItem = function loadFirstItem() {
     if (list.length > 0) {
       currentIndex = 0;
-      playItem(player, autoadvanceTimeout, list[0]);
+      playItem(player, list[0]);
     } else {
       currentIndex = -1;
     }
@@ -47,25 +48,16 @@ var playlistMaker = function(player, plist) {
     list = plist.slice();
   }
 
-  player.on('dispose', function() {
-    window.clearTimeout(playlistchangeTimeout);
-    playlistchangeTimeout = null;
-  });
-
-  var playlist = function playlist(plist) {
+  var describedVideo = function describedVideo(plist) {
     if (plist && isArray(plist)) {
       list = plist.slice();
       loadFirstItem();
-
-      playlistchangeTimeout = window.setTimeout(function() {
-        player.trigger('playlistchange');
-      }, 0);
     }
 
     return list.slice();
   };
 
-  playlist.currentItem = function item(index) {
+  describedVideo.currentItem = function item(index) {
     var src;
 
     if (typeof index === 'number' &&
@@ -73,12 +65,12 @@ var playlistMaker = function(player, plist) {
         index >= 0 &&
         index < list.length) {
       currentIndex = index;
-      playItem(player, autoadvanceTimeout, list[currentIndex]);
+      playItem(player, list[currentIndex]);
       return currentIndex;
     }
 
     src = player.currentSrc() || '';
-    currentIndex = playlist.indexOf(src);
+    currentIndex = describedVideo.indexOf(src);
 
     return currentIndex;
   };
@@ -86,12 +78,12 @@ var playlistMaker = function(player, plist) {
   // item can be either
   //  * a string
   //  * an array of sources, which are either strings or {src, type} objects
-  //  * a playlist item
-  playlist.contains = function contains(item) {
-    return player.playlist.indexOf(item) !== -1;
+  //  * a describedVideo item
+  describedVideo.contains = function contains(item) {
+    return player.describedVideo.indexOf(item) !== -1;
   };
 
-  playlist.indexOf = function indexOf(item) {
+  describedVideo.indexOf = function indexOf(item) {
     var ret = -1;
     var sources;
     var source;
@@ -123,43 +115,63 @@ var playlistMaker = function(player, plist) {
     return ret;
   };
 
-  playlist.next = function next() {
+  describedVideo.next = function next() {
     var prevIndex = currentIndex;
-    // make sure we don't go past the end of the playlist
+    // make sure we don't go past the end of the describedVideoList
     currentIndex = Math.min(currentIndex + 1, list.length - 1);
     if (prevIndex === currentIndex) {
       return;
     }
-    playItem(player, autoadvanceTimeout, list[currentIndex]);
+    playItem(player, list[currentIndex]);
     return list[currentIndex];
   };
 
-  playlist.previous = function previous() {
+  describedVideo.previous = function previous() {
     var prevIndex = currentIndex;
-    // make sure we don't go past the start of the playlist
+    // make sure we don't go past the start of the describedVideoList
     currentIndex = Math.max(currentIndex - 1, 0);
     if (prevIndex === currentIndex) {
       return;
     }
-    playItem(player, autoadvanceTimeout, list[currentIndex]);
+    playItem(player, list[currentIndex]);
     return list[currentIndex];
   };
 
-  playlist.autoadvance = function autoadvance(timeout) {
-    autoadvanceTimeout = timeout;
+  describedVideo.described = function described() {
+    var prevIndex = currentIndex;
+    currentIndex = Math.min(1, list.length - 1); // Described is the second entry (if it exists!)
+    if (prevIndex === currentIndex) {
+      return;
+    }
+    playItem(player, list[currentIndex]);
+    return list[currentIndex];
+  };
 
-    setupAutoadvance(player, autoadvanceTimeout);
+  describedVideo.original = function original() {
+    var prevIndex = currentIndex;
+    currentIndex = 0; // Original is the first entry
+    if (prevIndex === currentIndex) {
+      return;
+    }
+    playItem(player, list[currentIndex]);
+    return list[currentIndex];
+  };
+
+  describedVideo.isDescribed = function isDescribed() {
+    return ( currentIndex > 0 );
+  };
+
+  describedVideo.toggle = function toggle() {
+    if ( this.isDescribed() ) {
+      return this.original();
+    } else {
+      return this.described();
+    }
   };
 
   loadFirstItem();
 
-  player.on('loadstart', function() {
-    if (player.playlist.currentItem() === -1) {
-      setupAutoadvance.resetadvance(player);
-    }
-  });
-
-  return playlist;
+  return describedVideo;
 };
 
-module.exports = playlistMaker;
+module.exports = describedVideoMaker;

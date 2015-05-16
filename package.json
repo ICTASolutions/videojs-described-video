@@ -1,7 +1,7 @@
 {
-  "name": "videojs-playlist",
+  "name": "videojs-described-video",
   "version": "1.0.2",
-  "description": "Playlist plugin for videojs",
+  "description": "Described video plugin for videojs",
   "main": "index.js",
   "scripts": {
     "build": "npm run build-dist",
@@ -18,14 +18,17 @@
   },
   "keywords": [
     "videojs-plugin",
-    "playlist",
+    "described",
+    "description",
+    "blind",
+    "accessibility",
     "videojs"
   ],
-  "author": "Gary Katsevman <me@gkatsev.com>",
+  "author": "Owen Edwards <owen@icta-solutions.com>",
   "license": "Apache 2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/brightcove/videojs-playlist"
+    "url": "https://github.com/ICTASolutions/videojs-described-video"
   },
   "files": [
     "dist/",

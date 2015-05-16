@@ -1,5 +1,3 @@
-var setupAutoadvance = require('./autoadvance.js');
-
 var clearTracks = function(player) {
   var remoteTT = player.remoteTextTracks();
   var i = (remoteTT && remoteTT.length) || 0;
@@ -9,7 +7,7 @@ var clearTracks = function(player) {
   }
 };
 
-var playItem = function(player, autoadvanceTimeout, obj) {
+var playItem = function(player, obj) {
   var i, replay;
 
   replay = !player.paused() || player.ended();
@@ -28,7 +26,7 @@ var playItem = function(player, autoadvanceTimeout, obj) {
     player.play();
   }
 
-  setupAutoadvance(player, autoadvanceTimeout);
+  player.trigger('describedvideochange');
 
   return player;
 };

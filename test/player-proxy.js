@@ -11,10 +11,13 @@ module.exports = {
   on: Function.prototype,
   one: Function.prototype,
   off: Function.prototype,
-  playlist: {
+  describedVideo: {
     currentItem: Function.prototype,
     next: Function.prototype,
     previous: Function.prototype,
-    autoadvance: Function.prototype
+    described: Function.prototype,
+    original: Function.prototype,
+    toggle: Function.prototype,
+    isDescribed: Function.prototype,
   }
 };
