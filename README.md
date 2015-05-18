@@ -7,30 +7,47 @@ Add a button to Video.js to allow switching between two different versions of a 
 ## Usage
 
 ```js
-require('videojs-described-video');
+    <link rel='stylesheet' href='node_modules/video.js/dist/video-js/video-js.css'></script>
+    <script src='node_modules/video.js/dist/video-js/video.dev.js'></script>
+    <script src="node_modules/es5-shim/es5-shim.js"></script>
 
-var player = videojs('video');
-player.describedVideo([{
-  sources: [{
-    src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-    type: 'video/mp4'
-  }],
-  poster: 'http://media.w3.org/2010/05/sintel/poster.png'
-}, {
-  sources: [{
-    src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-    type: 'video/mp4'
-  }],
-  poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-}]);
+    <!-- include the describedVideo plugin -->
+    <link rel='stylesheet' href='src/described-video-button.css'></script>
+    <script src='dist/bundle.js'></script>
+  </head>
 
-player.describedVideo.described();
+  <body>
+
+    <video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
+
+    <script>
+      var describedVideoInfoMP4 = [{
+        // First is the original (default) set of sources
+        sources: [{
+          src: 'my_video.mp4',
+          type: 'video/mp4'
+        }],
+        poster: 'poster.png'
+      }, {
+        // Second is the alternate (described video) set of sources
+        sources: [{
+          src: 'my_video_with_description.mp4',
+          type: 'video/mp4'
+        }],
+        poster: 'poster_with_description_logo.png'
+      }];
+  
+      var video = document.querySelector('video');
+      var player = videojs(video, {});
+      player.describedVideo(describedVideoInfoMP4);
+    </script>
+  </body>
 ```
 
 ## API
 
 * [Methods](#methods)
-  * [`player.describedVideo([Array newPlaylist])`](#playerplaylistarray-newplaylist---array)
+  * [`player.describedVideo([Array newPlaylist])`](#playerdescribedvideoarray-newplaylist---array)
   * [`player.describedVideo.currentItem([Number newIndex])`](#playerdescribedvideocurrentitemnumber-newindex---number)
   * [`player.describedVideo.contains(Any item)`](#playerdescribedvideocontainsany-item---boolean)
   * [`player.describedVideo.indexOf(Any item)`](#playerdescribedvideoindexofany-item---number)
