@@ -1,0 +1,22 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 5,
+      "id": "transcription-credit",
+      "line": "auto",
+      "lineAlign": "start",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": "",
+      "size": 100,
+      "snapToLines": true,
+      "startTime": 4,
+      "text": "Transcribed by Celestials",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+  ]
+}

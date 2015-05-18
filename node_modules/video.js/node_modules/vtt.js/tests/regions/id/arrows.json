@@ -1,0 +1,39 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 1,
+      "id": "",
+      "line": "auto",
+      "lineAlign": "start",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": {
+        "lines": 3,
+        "regionAnchorX": 0,
+        "regionAnchorY": 100,
+        "scroll": "",
+        "viewportAnchorX": 0,
+        "viewportAnchorY": 100,
+        "width": 100
+      },
+      "size": 100,
+      "snapToLines": true,
+      "startTime": 0,
+      "text": "Text",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+    {
+      "lines": 3,
+      "regionAnchorX": 0,
+      "regionAnchorY": 100,
+      "scroll": "",
+      "viewportAnchorX": 0,
+      "viewportAnchorY": 100,
+      "width": 100
+    }
+  ]
+}

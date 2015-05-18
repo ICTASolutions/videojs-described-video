@@ -1,0 +1,22 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 13,
+      "id": "מים עד הים",
+      "line": "auto",
+      "lineAlign": "start",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": "",
+      "size": 100,
+      "snapToLines": true,
+      "startTime": 11,
+      "text": "Payload",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+  ]
+}

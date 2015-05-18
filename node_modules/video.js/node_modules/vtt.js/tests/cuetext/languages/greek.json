@@ -1,0 +1,22 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 18,
+      "id": "Το τέλος του κόσμου έρχεται",
+      "line": "auto",
+      "lineAlign": "start",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": "",
+      "size": 100,
+      "snapToLines": true,
+      "startTime": 16,
+      "text": "Payload",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+  ]
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../dev_build/vtt.js"></script>
+    <script src="../lib/vttcue-extended.js"></script>
+    <script src="../lib/vttregion-extended.js"></script>
+    <script type="text/javascript">
+      // The properties on DOM objects that we care about testing.
+      window.vttProps = ( "localName tagName className textContent" +
+                          " lang target data title" ).split(" ");
+
+      // Grab only the properties that we care about off an HTMLElement.
+      window.filterElement = function(element) {
+        var result = {};
+
+        vttProps.forEach(function(prop) {
+          if (element.hasOwnProperty(prop)) {
+            result[prop] = element[prop];
+          }
+        });
+
+        if (element.hasOwnProperty("style")) {
+          result.style = {};
+          for (var i = 0, l = element.style.length; i < l; i++) {
+            var prop = element.style[i];
+            result.style[prop] = element.style[prop];
+          }
+        }
+
+        if (element.hasOwnProperty("childNodes")) {
+          result.childNodes = [];
+          for (var x = 0, y = element.childNodes.length; x < y; x++) {
+            result.childNodes.push(filterElement(element.childNodes[x]));
+          }
+        }
+
+        return result;
+      }
+    </script>
+  </head>
+  <body>
+      <div id="overlay" style="position: relative; width: 300px; height: 150px"></div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 2,
+      "id": "",
+      "line": 42,
+      "lineAlign": "end",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": "",
+      "size": 100,
+      "snapToLines": false,
+      "startTime": 0,
+      "text": "Text",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+  ]
+}

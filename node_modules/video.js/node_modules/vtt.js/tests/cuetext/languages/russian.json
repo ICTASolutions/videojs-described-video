@@ -1,0 +1,22 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 16,
+      "id": "Это русская кия",
+      "line": "auto",
+      "lineAlign": "start",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": "",
+      "size": 100,
+      "snapToLines": true,
+      "startTime": 13,
+      "text": "Payload",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+  ]
+}

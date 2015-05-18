@@ -1,0 +1,22 @@
+{
+  "cues": [
+    {
+      "align": "middle",
+      "endTime": 18,
+      "id": "またの技術を元にモバイル版の開発も進められがリリースされている。",
+      "line": "auto",
+      "lineAlign": "start",
+      "pauseOnExit": false,
+      "position": 50,
+      "positionAlign": "middle",
+      "region": "",
+      "size": 100,
+      "snapToLines": true,
+      "startTime": 16,
+      "text": "Payload",
+      "vertical": ""
+    }
+  ],
+  "regions": [
+  ]
+}
