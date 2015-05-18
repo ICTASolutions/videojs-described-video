@@ -62,5 +62,8 @@
   },
   "browserify-shim": {
     "video.js": "global:videojs"
+  },
+  "optionalDependencies": {
+    "videojs-youtube": "^1.2.11"
   }
 }

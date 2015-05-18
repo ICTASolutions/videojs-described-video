@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <title>VideoJS Described Video example</title>
     <script>
       document.createElement('video');
       (function() {
@@ -79,6 +80,7 @@
     <link rel='stylesheet' href='node_modules/video.js/dist/video-js/video-js.css'></script>
     <script src='node_modules/video.js/dist/video-js/video.dev.js'></script>
     <script src="node_modules/es5-shim/es5-shim.js"></script>
+    <script src="node_modules/videojs-youtube/dist/vjs.youtube.js"></script>
 
     <!-- include the describedVideo plugin -->
     <link rel='stylesheet' href='src/described-video-button.css'></script>
@@ -98,8 +100,15 @@
     <button class="original">Original</button>
     <button class="described">Described</button>
 
+    <br>
+
+    <video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
+    <button class="original">Original</button>
+    <button class="described">Described</button>
+
     <script>
-    var describedVideoInfo = [{
+    //NOTE: This first example isn't actually a described version of the original video!
+    var describedVideoInfoMP4 = [{
       // First is the original (default) set of sources
       sources: [{
         src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -115,23 +124,53 @@
       poster: 'http://media.w3.org/2010/05/bunny/poster.png'
     }];
 
-    var video = document.querySelector('video');
+    // This really *is* a described version of the video!
+    var describedVideoInfoYouTube = [{
+      // First is the original (default) set of sources
+      sources: [{
+        src: 'http://www.youtube.com/watch?v=OOgrSvnmhrY',
+        type: 'video/youtube'
+      }],
+    }, {
+      // Second is the alternate (described video) set of sources
+      sources: [{
+        src: 'http://www.youtube.com/watch?v=949D1IhKKYs',
+        type: 'video/youtube'
+      }],
+    }];
 
-    var player = videojs(video, {
+    var video = document.querySelectorAll('video');
+
+    var player = [];
+
+    player[0] = videojs(video[0], {
       inactivityTimeout: 0
     });
 
-    player.describedVideo(describedVideoInfo);
-
-    var previous = document.querySelector('.original');
-    previous.addEventListener('click', function() {
-      player.describedVideo.original();
-    });
-    var next = document.querySelector('.described');
-    next.addEventListener('click', function() {
-      player.describedVideo.described();
+    player[1] = videojs(video[1], {
+      techOrder: ["youtube"],
+      inactivityTimeout: 0
     });
 
+    player[0].describedVideo(describedVideoInfoMP4);
+
+    player[1].describedVideo(describedVideoInfoYouTube);
+
+    var original = document.querySelectorAll('.original');
+    original[0].addEventListener('click', function() {
+      player[0].describedVideo.original();
+    });
+    original[1].addEventListener('click', function() {
+      player[1].describedVideo.original();
+    });
+
+    var original = document.querySelectorAll('.described');
+    original[0].addEventListener('click', function() {
+      player[0].describedVideo.described();
+    });
+    original[1].addEventListener('click', function() {
+      player[1].describedVideo.described();
+    });
     </script>
   </body>
 </html>
