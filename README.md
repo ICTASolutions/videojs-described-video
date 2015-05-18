@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/ICTASolutions/videojs-described-video.svg?branch=master)](https://travis-ci.org/ICTASolutions/videojs-described-video)
+
 # Described Video plugin for videojs
+
+Add a button to Video.js to allow switching between two different versions of a video: the original and one with 'audio descripton' (additional narration added into the soundtrack to assist understanding of the video, especially by people who are blind or low-vision).
 
 ## Usage
 
