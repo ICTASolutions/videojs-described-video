@@ -4,6 +4,10 @@
 
 Add a button to Video.js to allow switching between two different versions of a video: the original and one with 'audio descripton' (additional narration added into the soundtrack to assist understanding of the video, especially by people who are blind or low-vision).
 
+## Example
+
+The examples from index.html can be seen at http://ictasolutions.github.io/videojs-described-video/ 
+
 ## Usage
 
 ```js
