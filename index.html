@@ -127,35 +127,53 @@
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<div class="highlight highlight-js"><pre><span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>videojs-described-video<span class="pl-pds">'</span></span>);
+<div class="highlight highlight-js"><pre>
+    <span class="pl-k">&lt;link</span> <span class="na">rel=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">href=</span><span class="s">&#39;node_modules/video.js/dist/video-js/video-js.css&#39;</span><span class="pl-k">&gt;</span>
+      <span class="pl-k">&lt;script </span><span class="na">src=</span><span class="s">&#39;node_modules/video.js/dist/video-js/video.dev.js&#39;</span><span class="pl-k">&gt;&lt;/script&gt;</span>
+      <span class="pl-k">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/es5-shim/es5-shim.js&quot;</span><span class="pl-k">&gt;&lt;/script&gt;</span>
 
-<span class="pl-k">var</span> player <span class="pl-k">=</span> videojs(<span class="pl-s"><span class="pl-pds">'</span>video<span class="pl-pds">'</span></span>);
-player.describedVideo([{
-  sources<span class="pl-k">:</span> [{
-    src<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/sintel/trailer.mp4<span class="pl-pds">'</span></span>,
-    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>video/mp4<span class="pl-pds">'</span></span>
-  }],
-  poster<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/sintel/poster.png<span class="pl-pds">'</span></span>
-}, {
-  sources<span class="pl-k">:</span> [{
-    src<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/bunny/trailer.mp4<span class="pl-pds">'</span></span>,
-    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>video/mp4<span class="pl-pds">'</span></span>
-  }],
-  poster<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/bunny/poster.png<span class="pl-pds">'</span></span>
-}]);
+      <span class="pl-c">&lt;!-- include the describedVideo plugin --&gt;</span>
+      <span class="pl-k">&lt;link</span> <span class="na">rel=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">href=</span><span class="s">&#39;src/described-video-button.css&#39;</span><span class="pl-k">&gt;&lt;/script&gt;</span>
+      <span class="pl-k">&lt;script </span><span class="na">src=</span><span class="s">&#39;dist/bundle.js&#39;</span><span class="pl-k">&gt;&lt;/script&gt;</span>
+    <span class="pl-k">&lt;/head&gt;</span>
+    <span class="pl-k">&lt;body&gt;</span>
+      <span class="pl-k">&lt;video</span> <span class="na">class=</span><span class="s">&quot;video-js vjs-default-skin&quot;</span> <span class="na">controls</span> <span class="na">width=</span><span class="s">&#39;640px&#39;</span> <span class="na">height=</span><span class="s">&#39;360px&#39;</span><span class="pl-k">&gt;</span>
+      <span class="pl-k">&lt;/video&gt;</span>
 
-player.describedVideo.described();</pre></div>
+      <span class="pl-k">&lt;script&gt;</span>
+        <span class="pl-k">var</span> <span class="pl-en">describedVideoInfoMP4</span> <span class="o">=</span> <span class="pl-pds">[{</span>
+          <span class="pl-c1">// First is the original (default) set of sources</span>
+          <span class="pl-en">sources</span><span class="o">:</span> <span class="pl-pds">[{</span>
+            <span class="pl-en">src</span><span class="o">:</span> <span class="pl-s1">&#39;my_video.mp4&#39;</span><span class="pl-pds">,</span>
+            <span class="pl-en">type</span><span class="o">:</span> <span class="pl-s1">&#39;video/mp4&#39;</span>
+          <span class="pl-pds">}],</span>
+          <span class="pl-en">poster</span><span class="o">:</span> <span class="pl-s1">&#39;poster.png&#39;</span>
+        <span class="pl-pds">},</span> <span class="pl-pds">{</span>
+          <span class="pl-c1">// Second is the alternate (described video) set of sources</span>
+          <span class="pl-en">sources</span><span class="o">:</span> <span class="pl-pds">[{</span>
+            <span class="pl-en">src</span><span class="o">:</span> <span class="pl-s1">&#39;my_video_with_description.mp4&#39;</span><span class="pl-pds">,</span>
+            <span class="pl-en">type</span><span class="o">:</span> <span class="pl-s1">&#39;video/mp4&#39;</span>
+          <span class="pl-pds">}],</span>
+          <span class="pl-en">poster</span><span class="o">:</span> <span class="pl-s1">&#39;poster_with_description_logo.png&#39;</span>
+        <span class="pl-pds">}];</span>
+
+        <span class="pl-k">var</span> <span class="pl-en">video</span> <span class="o">=</span> <span class="nb">document</span><span class="pl-pds">.</span><span class="pl-en">querySelector</span><span class="pl-pds">(</span><span class="pl-s1">&#39;video&#39;</span><span class="pl-pds">);</span>
+        <span class="pl-k">var</span> <span class="pl-en">player</span> <span class="o">=</span> <span class="pl-en">videojs</span><span class="pl-pds">(</span><span class="pl-en">video</span><span class="pl-pds">,</span> <span class="pl-pds">{});</span>
+        <span class="pl-en">player</span><span class="pl-pds">.</span><span class="pl-en">describedVideo</span><span class="pl-pds">(</span><span class="pl-en">describedVideoInfoMP4</span><span class="pl-pds">);</span>
+      <span class="pl-k">&lt;/script&gt;</span>
+    <span class="pl-k">&lt;/body&gt;</span>
+  </pre></div>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
 
-<video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
+<video class="video-js vjs-default-skin" controls width='480px' height='270px'></video>
 <button class="original">Original</button>
 <button class="described">Described</button>
 
 <br>
 
-<video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
+<video class="video-js vjs-default-skin" controls width='480px' height='270px'></video>
 <button class="original">Original</button>
 <button class="described">Described</button>
 
