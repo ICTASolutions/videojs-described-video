@@ -1,7 +1,19 @@
 <!doctype html>
 <html>
   <head>
-    <title>VideoJS Described Video example</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>VideoJS Described Video by ICTASolutions</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
     <script>
       document.createElement('video');
       (function() {
@@ -92,19 +104,77 @@
         width: 10em;
       }
     </style>
+
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>VideoJS Described Video</h1>
+        <p>Described Video plugin for videojs</p>
+        <p class="view"><a href="https://github.com/ICTASolutions/videojs-described-video">View the Project on GitHub <small>ICTASolutions/videojs-described-video</small></a></p>
+        <ul>
+          <li><a href="https://github.com/ICTASolutions/videojs-described-video/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ICTASolutions/videojs-described-video/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ICTASolutions/videojs-described-video">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="described-video-plugin-for-videojs" class="anchor" href="#described-video-plugin-for-videojs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Described Video plugin for videojs</h1>
 
-    <video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
-    <button class="original">Original</button>
-    <button class="described">Described</button>
+<p>Add a button to Video.js to allow switching between two different versions of a video: the original and one with 'audio descripton' (additional narration added into the soundtrack to assist understanding of the video, especially by people who are blind or low-vision).</p>
 
-    <br>
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-    <video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
-    <button class="original">Original</button>
-    <button class="described">Described</button>
+<div class="highlight highlight-js"><pre><span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>videojs-described-video<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> player <span class="pl-k">=</span> videojs(<span class="pl-s"><span class="pl-pds">'</span>video<span class="pl-pds">'</span></span>);
+player.describedVideo([{
+  sources<span class="pl-k">:</span> [{
+    src<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/sintel/trailer.mp4<span class="pl-pds">'</span></span>,
+    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>video/mp4<span class="pl-pds">'</span></span>
+  }],
+  poster<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/sintel/poster.png<span class="pl-pds">'</span></span>
+}, {
+  sources<span class="pl-k">:</span> [{
+    src<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/bunny/trailer.mp4<span class="pl-pds">'</span></span>,
+    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>video/mp4<span class="pl-pds">'</span></span>
+  }],
+  poster<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>http://media.w3.org/2010/05/bunny/poster.png<span class="pl-pds">'</span></span>
+}]);
+
+player.describedVideo.described();</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
+<button class="original">Original</button>
+<button class="described">Described</button>
+
+<br>
+
+<video class="video-js vjs-default-skin" controls width='640px' height='360px'></video>
+<button class="original">Original</button>
+<button class="described">Described</button>
+
+
+<h2>
+<a id="acknowledgement" class="anchor" href="#acknowledgement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgement</h2>
+
+<p>This plugin is based on the <a href="https://github.com/brightcove/videojs-playlist">playlist plugin</a> from Brighcove.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/ICTASolutions/videojs-described-video/blob/master/LICENSE.md">LICENSE</a>
+</h2>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/ICTASolutions">ICTASolutions</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
 
     <script>
     //NOTE: This first example isn't actually a described version of the original video!
