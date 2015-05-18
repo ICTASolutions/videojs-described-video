@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'describedvideo';
+  src:url('fonts/describedvideo.eot?b9ct3d');
+  src:url('fonts/describedvideo.eot?#iefixb9ct3d') format('embedded-opentype'),
+    url('fonts/describedvideo.woff?b9ct3d') format('woff'),
+    url('fonts/describedvideo.ttf?b9ct3d') format('truetype'),
+    url('fonts/describedvideo.svg?b9ct3d#describedvideo') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .described-video-button {
   float: right !important;
   cursor: pointer;
@@ -5,11 +16,19 @@
   line-height: 3em;
 }
 
-/* TODO: Use an icon instead of this text, based on the icon at
- * http://www.ryerson.ca/accessibility/tools/access_symbols.html
- */
 .described-video-button:before {
-  content: "AD)";
+  font-family: 'describedvideo' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 2em !important;
+  line-height: 1.5em !important;
+  content: "\e600";
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .described-video-button.is-described:before {
