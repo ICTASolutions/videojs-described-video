@@ -5,8 +5,11 @@
   line-height: 3em;
 }
 
+/* TODO: Use an icon instead of this text, based on the icon at
+ * http://www.ryerson.ca/accessibility/tools/access_symbols.html
+ */
 .described-video-button:before {
-  content: "D))";
+  content: "AD)";
 }
 
 .described-video-button.is-described:before {
