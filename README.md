@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/brightcove/videojs-playlist.svg?branch=master)](https://travis-ci.org/brightcove/videojs-playlist)
-
+[![Build Status](https://travis-ci.org/ICTASolutions/videojs-described-video.svg?branch=master)](https://travis-ci.org/ICTASolutions/videojs-described-video)
 # Described Video plugin for videojs
 
 ## Usage
@@ -29,15 +28,14 @@ player.describedVideo.described();
 
 * [Methods](#methods)
   * [`player.describedVideo([Array newPlaylist])`](#playerplaylistarray-newplaylist---array)
-  * [`player.describedVideo.currentItem([Number newIndex])`](#playerplaylistcurrentitemnumber-newindex---number)
-  * [`player.describedVideo.contains(Any item)`](#playerplaylistcontainsany-item---boolean)
-  * [`player.describedVideo.indexOf(Any item)`](#playerplaylistindexofany-item---number)
-  * [`player.describedVideo.next()`](#playerplaylistnext---object)
-  * [`player.describedVideo.previous()`](#playerplaylistprevious---object)
-  * [`player.describedVideo.described()`](#playerplaylistdescribed---object)
-  * [`player.describedVideo.original()`](#playerplaylistoriginal---object)
+  * [`player.describedVideo.currentItem([Number newIndex])`](#playerdescribedvideocurrentitemnumber-newindex---number)
+  * [`player.describedVideo.contains(Any item)`](#playerdescribedvideocontainsany-item---boolean)
+  * [`player.describedVideo.indexOf(Any item)`](#playerdescribedvideoindexofany-item---number)
+  * [`player.describedVideo.described()`](#playerdescribedvideodescribed---object)
+  * [`player.describedVideo.original()`](#playerdescribedvideooriginal---object)
+  * [`player.describedVideo.toggle()`](#playerdescribedvideotoggle---object)
 * [Events](#events)
-  * [`playlistchange`](#playlistchange)
+  * [`describedvideochange`](#describedvideochange)
 
 ### Methods
 #### `player.describedVideo([Array newPlaylist]) -> Array`
@@ -75,7 +73,7 @@ player.describedVideo([{
 // }]
 ```
 
-#### `player.playlist.currentItem([Number newIndex]) -> Number`
+#### `player.describedVideo.currentItem([Number newIndex]) -> Number`
 This functions allows you to either set or get the current item index.
 If called without arguments, it is a getter, with an argument, it is a setter.
 
@@ -95,21 +93,21 @@ player.src('http://example.com/video.mp4');
 player.playlist.currentItem(); // -1
 ```
 
-#### `player.playlist.contains(Any item) -> Boolean`
-This function allows you to ask the playlist whether a string, source object, or playlist item is contained within it.
+#### `player.describedVideo.contains(Any item) -> Boolean`
+This function allows you to ask the describedVideo whether a string, source object, or playlist item is contained within it.
 Assuming the above playlist, consider the following example:
 
 ```js
-playlist.contains('http://media.w3.org/2010/05/sintel/trailer.mp4')
+describedVideo.contains('http://media.w3.org/2010/05/sintel/trailer.mp4')
 // true
 
-playlist.contains([{
+describedVideo.contains([{
   src: 'http://media.w3.org/2010/05/sintel/poster.png',
   type: 'image/png'
 }])
 // false
 
-playlist.contains({
+describedVideo.contains({
   sources: [{
     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
     type: 'video/mp4'
@@ -118,21 +116,21 @@ playlist.contains({
 // true
 ```
 
-#### `player.playlist.indexOf(Any item) -> Number`
-This function allows you to ask the playlist whether a string, source object, or playlist item is contained within it and at what index. It returns `-1` for non-existent items, otherwise, the corresponding index.
+#### `player.describedVideo.indexOf(Any item) -> Number`
+This function allows you to ask the describedVideo whether a string, source object, or playlist item is contained within it and at what index. It returns `-1` for non-existent items, otherwise, the corresponding index.
 Assuming the above playlist, consider the following example:
 
 ```js
-playlist.indexOf('http://media.w3.org/2010/05/bunny/trailer.mp4')
+describedVideo.indexOf('http://media.w3.org/2010/05/bunny/trailer.mp4')
 // 1
 
-playlist.contains([{
+describedVideo.contains([{
   src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
   type: 'video/mp4'
 }])
 // 3
 
-playlist.contains({
+describedVideo.contains({
   sources: [{
     src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
     type: 'video/mp4'
@@ -141,56 +139,12 @@ playlist.contains({
 // 4
 ```
 
-#### `player.playlist.next() -> Object`
-This functions allows you to advance to the next item in the playlist. You will receive the new playlist item back from this call. `player.playlist.currentItem` will be updated to return the new index.
-If you are at the end of the playlist, you will not be able to proceed past the end and instead will not receive anything back;
-
-```js
-player.playlist.next();
-// {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-// }
-
-
-player.playlist.currenItem(player.describedVideo().length - 1); // set to last item
-// 4
-player.playlist.next();
-// undefined
-```
-
-#### `player.playlist.previous() -> Object`
-This functions allows you to return to the previous item in the playlist. You will receive the new playlist item back from this call. `player.playlist.currentItem` will be updated to return the new index.
-If you are at the start of the playlist, you will not be able to proceed past the start and instead will not receive anything back;
-
-```js
-player.playlist.currenItem(1); // set to second item in the playlist
-// 1
-player.playlist.previous();
-// {
-//   sources: [{
-//     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-//     type: 'video/mp4'
-//   }],
-//   poster: 'http://media.w3.org/2010/05/sintel/poster.png'
-// }
-
-
-player.playlist.currenItem();
-// 0
-player.playlist.previous();
-// undefined
-```
-
-#### `player.playlist.described() -> Object`
-This functions allows you to switch to the described item in the playlist. You will receive the new playlist item back from this call. `player.playlist.currentItem` will be updated to return the new index.
+#### `player.describedVideo.described() -> Object`
+This functions allows you to switch to the described item in the playlist. You will receive the new playlist item back from this call. `player.describedVideo.currentItem` will be updated to return the new index.
 If you are already at the described item of the playlist, you will not be able to proceed past the end and instead will not receive anything back;
 
 ```js
-player.playlist.next();
+player.describedVideo.described();
 // {
 //   sources: [{
 //     src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
@@ -198,22 +152,14 @@ player.playlist.next();
 //   }],
 //   poster: 'http://media.w3.org/2010/05/bunny/poster.png'
 // }
-
-
-player.playlist.currenItem(player.describedVideo().length - 1); // set to last item
-// 4
-player.playlist.next();
-// undefined
 ```
 
-#### `player.playlist.original() -> Object`
-This functions allows you to switch to the original item in the playlist. You will receive the new playlist item back from this call. `player.playlist.currentItem` will be updated to return the new index.
+#### `player.describedVideo.original() -> Object`
+This functions allows you to switch to the original item in the playlist. You will receive the new playlist item back from this call. `player.describedVideo.currentItem` will be updated to return the new index.
 If you are already at the original item of the playlist, you will not be able to proceed past the start and instead will not receive anything back;
 
 ```js
-player.playlist.currenItem(1); // set to second item in the playlist
-// 1
-player.playlist.previous();
+player.describedVideo.original();
 // {
 //   sources: [{
 //     src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -221,30 +167,23 @@ player.playlist.previous();
 //   }],
 //   poster: 'http://media.w3.org/2010/05/sintel/poster.png'
 // }
-
-
-player.playlist.currenItem();
-// 0
-player.playlist.previous();
-// undefined
 ```
 
 ### Events
 
-#### `playlistchange`
-This event is fired asynchronously whenever the playlist is changed.
-It is fired asynchronously to let the browser start loading the first video in the new playlist.
+#### `describedvideochange`
+This event is fired asynchronously whenever the current video is changed.
 
 ```js
-player.on('playlistchange', function() {
+player.on('describedvideochange', function() {
   console.log(player.describedVideo());
 });
 
-player.describedVideo([1,2,3]);
-// [1,2,3]
+player.describedVideo.described();
+//
 
-player.describedVideo([4,5,6]);
-// [4,5,6]
+player.describedVideo.original();
+//
 ```
 
 ## Development

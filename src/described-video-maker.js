@@ -26,13 +26,13 @@ var indexInSources = function(arr, src) {
 // describedVideo() // getter, ["a", "b"]
 // describedVideo.currentItem() // getter, 0
 // describedVideo.currentItem(1) // setter, 1
-// describedVideo.next() // "b"
-// describedVideo.previous() // "a"
 // describedVideo.described() // "b"
 // describedVideo.original() // "a"
 // describedVideo.toggle() // "b"
 // describedVideo.isDescribed() // true
 var describedVideoMaker = function(player, plist) {
+  //NOTE: The currentIndex logic is here to allow future support of more than
+  //      one described video (e.g. in different languages)
   var currentIndex = -1;
   var list = [];
   var loadFirstItem = function loadFirstItem() {
@@ -113,28 +113,6 @@ var describedVideoMaker = function(player, plist) {
     }
 
     return ret;
-  };
-
-  describedVideo.next = function next() {
-    var prevIndex = currentIndex;
-    // make sure we don't go past the end of the describedVideoList
-    currentIndex = Math.min(currentIndex + 1, list.length - 1);
-    if (prevIndex === currentIndex) {
-      return;
-    }
-    playItem(player, list[currentIndex]);
-    return list[currentIndex];
-  };
-
-  describedVideo.previous = function previous() {
-    var prevIndex = currentIndex;
-    // make sure we don't go past the start of the describedVideoList
-    currentIndex = Math.max(currentIndex - 1, 0);
-    if (prevIndex === currentIndex) {
-      return;
-    }
-    playItem(player, list[currentIndex]);
-    return list[currentIndex];
   };
 
   describedVideo.described = function described() {
